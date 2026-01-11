@@ -6,7 +6,7 @@
 /*   By: rdamasce <rdamasce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:11:03 by rdamasce          #+#    #+#             */
-/*   Updated: 2026/01/11 18:53:26 by rdamasce         ###   ########.fr       */
+/*   Updated: 2026/01/11 20:52:20 by rdamasce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ int	parse_args(t_fractal *f, int argc, char **argv)
 {
 	if (argc < 2)
 		return (0);
-	if (!strcmp(argv[1], "mandelbrot"))
+	if (!ft_strcmp(argv[1], "mandelbrot"))
 		f->type = MANDELBROT;
-	else if (!strcmp(argv[1], "julia"))
+	else if (!ft_strcmp(argv[1], "julia"))
 	{
 		f->type = JULIA;
 		if (argc >= 4)
 		{
-			f->julia_re = atof(argv[2]);
-			f->julia_im = atof(argv[3]);
+			f->julia_re = ft_atof(argv[2]);
+			f->julia_im = ft_atof(argv[3]);
 		}
 		else
 		{
@@ -45,4 +45,58 @@ int	parse_args(t_fractal *f, int argc, char **argv)
 	else
 		return (0);
 	return (1);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	while (*s1 && (*s1 == *s2))
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
+}
+
+static double	parse_fraction(const char *str, int *i)
+{
+	double	frac;
+	double	div;
+
+	frac = 0.0;
+	div = 10.0;
+	while (str[*i] >= '0' && str[*i] <= '9')
+	{
+		frac += (str[*i] - '0') / div;
+		div *= 10.0;
+		(*i)++;
+	}
+	return (frac);
+}
+
+double	ft_atof(const char *str)
+{
+	double	result;
+	double	sign;
+	int		i;
+
+	result = 0.0;
+	sign = 1.0;
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1.0;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10.0 + (str[i] - '0');
+		i++;
+	}
+	if (str[i] == '.')
+	{
+		i++;
+		result += parse_fraction(str, &i);
+	}
+	return (result * sign);
 }
