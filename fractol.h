@@ -6,7 +6,7 @@
 /*   By: rdamasce <rdamasce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 14:35:25 by rdamasce          #+#    #+#             */
-/*   Updated: 2026/01/11 18:51:32 by rdamasce         ###   ########.fr       */
+/*   Updated: 2026/01/11 20:04:09 by rdamasce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ typedef struct s_app
 	t_fractal	fractal;
 }	t_app;
 
-int		init_app(t_app *app, int argc, char **argv);
-void	render(t_app *app);
-int		mandelbrot(double cr, double ci, int max_iter);
-int		julia(double zr, double zi, t_fractal *f);
-int		key_hook(int keycode, t_app *app);
-int		mouse_hook(int button, int x, int y, t_app *app);
-int		close_hook(t_app *app);
-void	put_pixel(t_img *img, int x, int y, int color);
-int		parse_args(t_fractal *f, int argc, char **argv);
+int			init_app(t_app *app, int argc, char **argv);
+void		render(t_app *app);
+int			mandelbrot(double cr, double ci, int max_iter);
+int			julia(double zr, double zi, t_fractal *f);
+int			key_hook(int keycode, t_app *app);
+int			mouse_hook(int button, int x, int y, t_app *app);
+int			close_hook(t_app *app);
+int			parse_args(t_fractal *f, int argc, char **argv);
+void		put_pixel(t_img *img, int x, int y, int color);
 
 #endif

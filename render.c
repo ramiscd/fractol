@@ -6,7 +6,7 @@
 /*   By: rdamasce <rdamasce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:23:08 by rdamasce          #+#    #+#             */
-/*   Updated: 2026/01/11 19:00:56 by rdamasce         ###   ########.fr       */
+/*   Updated: 2026/01/11 20:01:41 by rdamasce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,42 @@ static int	get_color(int iter, int max_iter)
 	return ((r << 16) | (g << 8) | b);
 }
 
-void	render(t_app *app)
+static void	draw_pixel(t_app *app, int x, int y)
 {
-	int		x;
-	int		y;
-	int		iter;
 	double	cr;
 	double	ci;
 	double	re_factor;
 	double	im_factor;
+	int		iter;
 
-	y = 0;
 	re_factor = (app->fractal.max_re - app->fractal.min_re) / WIDTH;
 	im_factor = (app->fractal.max_im - app->fractal.min_im) / HEIGHT;
+	ci = app->fractal.max_im - y * im_factor;
+	cr = app->fractal.min_re + x * re_factor;
+	if (app->fractal.type == MANDELBROT)
+		iter = mandelbrot(cr, ci, app->fractal.max_iter);
+	else
+		iter = julia(cr, ci, &app->fractal);
+	put_pixel(&app->img, x, y,
+		get_color(iter, app->fractal.max_iter));
+}
+
+void	render(t_app *app)
+{
+	int		x;
+	int		y;
+	double	re_factor;
+	double	im_factor;
+
+	re_factor = (app->fractal.max_re - app->fractal.min_re) / WIDTH;
+	im_factor = (app->fractal.max_im - app->fractal.min_im) / HEIGHT;
+	y = 0;
 	while (y < HEIGHT)
 	{
-		ci = app->fractal.max_im - y * im_factor;
 		x = 0;
 		while (x < WIDTH)
 		{
-			cr = app->fractal.min_re + x * re_factor;
-			if (app->fractal.type == MANDELBROT)
-				iter = mandelbrot(cr, ci, app->fractal.max_iter);
-			else
-				iter = julia(cr, ci, &app->fractal);
-			put_pixel(&app->img, x, y, get_color(iter, app->fractal.max_iter));
+			draw_pixel(app, x, y);
 			x++;
 		}
 		y++;

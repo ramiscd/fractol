@@ -6,7 +6,7 @@
 /*   By: rdamasce <rdamasce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:36:08 by rdamasce          #+#    #+#             */
-/*   Updated: 2026/01/11 18:55:35 by rdamasce         ###   ########.fr       */
+/*   Updated: 2026/01/11 19:49:49 by rdamasce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,40 @@
 #define ZOOM_OUT 5
 #define PAN_STEP 0.1
 
-int	key_hook(int keycode, t_app *app)
+static void	pan_fractal(t_fractal *f, int keycode)
 {
 	double	dx;
 	double	dy;
 
-	if (keycode == 65307)
-		exit(0);
-	dx = (app->fractal.max_re - app->fractal.min_re) * PAN_STEP;
-	dy = (app->fractal.max_im - app->fractal.min_im) * PAN_STEP;
+	dx = (f->max_re - f->min_re) * PAN_STEP;
+	dy = (f->max_im - f->min_im) * PAN_STEP;
 	if (keycode == 65361)
 	{
-		app->fractal.min_re -= dx;
-		app->fractal.max_re -= dx;
+		f->min_re -= dx;
+		f->max_re -= dx;
 	}
 	else if (keycode == 65363)
 	{
-		app->fractal.min_re += dx;
-		app->fractal.max_re += dx;
+		f->min_re += dx;
+		f->max_re += dx;
 	}
 	else if (keycode == 65362)
 	{
-		app->fractal.min_im += dy;
-		app->fractal.max_im += dy;
+		f->min_im += dy;
+		f->max_im += dy;
 	}
 	else if (keycode == 65364)
 	{
-		app->fractal.min_im -= dy;
-		app->fractal.max_im -= dy;
+		f->min_im -= dy;
+		f->max_im -= dy;
 	}
+}
+
+int	key_hook(int keycode, t_app *app)
+{
+	if (keycode == 65307)
+		exit(0);
+	pan_fractal(&app->fractal, keycode);
 	render(app);
 	return (0);
 }
