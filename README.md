@@ -23,16 +23,6 @@ Esse projeto explora:
 
 ---
 
-## 🚀 Demonstração
-
-| Mandelbrot | Julia |
-|------------|-------|
-| ![Mandelbrot](assets/mandelbrot.png) | ![Julia](assets/julia.png) |
-
-*(Troque por suas próprias imagens no diretório `assets/` para ilustrar melhor.)*
-
----
-
 ## 🛠️ Funcionalidades principais
 
 - Renderização de fractais clássicos: **Mandelbrot**, **Julia**, etc. :contentReference[oaicite:2]{index=2}  
