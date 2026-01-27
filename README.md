@@ -12,7 +12,7 @@ Explore conjuntos como **Mandelbrot** e **Julia** em tempo real com zoom, movime
 ## 🎯 Sobre o projeto
 
 fractol é um programa que renderiza fractais matemáticos com gráficos interativos.  
-Ele mapeia pontos do plano complexo para uma janela gráfica, traçando padrões infinitamente repetitivos e coloridos com base em relações iterativas. :contentReference[oaicite:1]{index=1}
+Ele mapeia pontos do plano complexo para uma janela gráfica, traçando padrões infinitamente repetitivos e coloridos com base em relações iterativas.
 
 Esse projeto explora:
 
