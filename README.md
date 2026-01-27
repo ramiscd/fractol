@@ -1,7 +1,7 @@
 # fractol
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ramiscd/fractol/main/assets/fractal_preview.png" alt="fractol preview" width="700px">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Julia-Set_z2%2Bc_ani.gif" alt="fractol preview" width="700px">
 </p>
 
 Um explorador visual de fractais em **C**, construído com a biblioteca gráfica **MiniLibX**.  
